@@ -1,36 +1,26 @@
-import { createUserDocumentFromAuth, checkUserExists } from '../../utils/firebase'
 import SignUpForm from "../../components/sign-up-form/sign-up-form";
-import EmailSignIn from "../../components/email-sign-in/email-sign-in";
-import GoogleSignIn from "../../components/google-sign-in/google-sign-in";
+import SignInForm from "../../components/sign-in-form/sign-in-form";
 import {useNavigate} from "react-router-dom";
+import {useEffect} from "react";
+import './sign-in.scss'
 
-const SignIn = ({setSignedIn}) => {
+const SignIn = ({signedIn, setSignedIn}) => {
 
   const navigate = useNavigate();
 
-  const onSignInHandler = async (user) => {
-    try {
-      await authenticateUser(user);
-      setSignedIn(true);
-      navigate("/");
-    } catch (e) {
-      console.error('Error in signing in', e.message)
-    }
-  }
+  useEffect(() => {
+    console.log("in sign in: " + signedIn)
+    if (signedIn) { navigate("/") }
+  }, [signedIn]);
 
-  const authenticateUser = async (user) => {
-    if (!await checkUserExists(user)) {
-      console.log('user does not exist')
-      await createUserDocumentFromAuth(user);
-    }
+  const handleSignIn = () => {
+      setSignedIn(true);
   }
 
   return (
-    <div>
-      <h1>Sign In Page</h1>
-      <EmailSignIn onSignInHandler={onSignInHandler}/>
-      <GoogleSignIn onSignInHandler={onSignInHandler}/>
-      <SignUpForm onSignUphandler={onSignInHandler} />
+    <div className="authentication-container">
+      <SignInForm onSignInHandler={handleSignIn}/>
+      <SignUpForm onSignInHandler={handleSignIn} />
     </div>
   );
 }

@@ -9,15 +9,17 @@ import {useState} from "react";
 
 function App() {
 
-  const [signedIn, setSignedIn] = useState('false')
+  // todo call method to check is alreadyAuthenticated
+
+  const [signedIn, setSignedIn] = useState(false)
 
   return (
     <Routes>
       <Route path='/' element={<Navigation signedIn={signedIn}/>}>
         <Route index element={<Home />} />
         <Route path='shop' element={<Shop />} />
-        <Route path='sign-in' element={<SignIn setSignedIn={setSignedIn}/>} />
-        <Route path='sign-out' element={<SignOut setSignedIn={setSignedIn}/>} />
+        <Route path='sign-in' element={<SignIn signedIn={signedIn} setSignedIn={setSignedIn}/>} />
+        <Route path='sign-out' element={<SignOut signedIn={signedIn} setSignedIn={setSignedIn}/>} />
       </Route>
     </Routes>
 );

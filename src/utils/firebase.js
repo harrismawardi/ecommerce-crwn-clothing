@@ -30,7 +30,7 @@ export const checkUserExists = async (userAuth) => {
   return userSnapshot.exists();
 };
 
-export const createUserDocumentFromAuth = async (userAuth) => { 
+export const createUserDocumentFromAuth = async (userAuth, additionalInformation) => {
   const { displayName, email } = userAuth;
   const createdAt = new Date();
   const userDocRef = doc(db, 'users', userAuth.uid);
@@ -38,7 +38,8 @@ export const createUserDocumentFromAuth = async (userAuth) => {
   await setDoc(userDocRef, {
     displayName,
     email,
-    createdAt
+    createdAt,
+    ...additionalInformation
   });
 };
 
@@ -51,4 +52,6 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   return await signInWithEmailAndPassword(auth, email, password);
 }
 
-export const logUserOut = () => signOut(auth);
+export const logUserOut = async () => {
+  await signOut(auth);
+}
