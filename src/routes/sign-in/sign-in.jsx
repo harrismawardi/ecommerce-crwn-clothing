@@ -1,20 +1,21 @@
 import SignUpForm from "../../components/sign-up-form/sign-up-form";
 import SignInForm from "../../components/sign-in-form/sign-in-form";
 import {useNavigate} from "react-router-dom";
-import {useEffect} from "react";
+import {useContext, useEffect} from "react";
+import {UserContext} from "../../contexts/user.context";
 import './sign-in.scss'
 
-const SignIn = ({signedIn, setSignedIn}) => {
+const SignIn = () => {
 
   const navigate = useNavigate();
+  const { setCurrentUser, currentUser } = useContext(UserContext)
 
   useEffect(() => {
-    console.log("in sign in: " + signedIn)
-    if (signedIn) { navigate("/") }
-  }, [signedIn]);
+    if (currentUser) { navigate("/") }
+  }, [currentUser]);
 
-  const handleSignIn = () => {
-      setSignedIn(true);
+  const handleSignIn = (user) => {
+    setCurrentUser(user)
   }
 
   return (

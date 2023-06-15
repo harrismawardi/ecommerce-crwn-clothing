@@ -1,21 +1,23 @@
 import { logUserOut } from "../../utils/firebase";
 import { useNavigate } from "react-router-dom";
-import {useEffect} from "react";
+import { useContext, useEffect } from "react";
+import { UserContext } from "../../contexts/user.context";
 
-const SignOut = ({ signedIn, setSignedIn }) => {
+const SignOut = () => {
 
   const navigate = useNavigate();
+  const { currentUser, setCurrentUser } = useContext(UserContext)
 
   useEffect(() => {
-    if (!signedIn) {
+    if (!currentUser) {
       navigate("/sign-in")
     }
-  }, [signedIn]);
+  }, [currentUser]);
 
   const handleSignOut = async () => {
     try {
       await logUserOut();
-      setSignedIn(false);
+      setCurrentUser(null);
       navigate("/");
     } catch(e) {
       console.error("Issue in logging user out.")

@@ -58,7 +58,7 @@ const SignInForm = ({ onSignInHandler }) => {
         <FormInput label="Email" name="email" type="email" required={true} onChange={handleChange} value={email} />
         <FormInput label="Password" name="password" type="password" required={true} onChange={handleChange} value={password} />
         <div className="buttons-container">
-          <Button type="submit">Sign In</Button>
+          <Button buttonType="inverted" type="submit">Sign In</Button>
           <Button buttonType="google" type="button" onClick={signInWithGoogle}>Google Sign In</Button>
         </div>
       </form>
