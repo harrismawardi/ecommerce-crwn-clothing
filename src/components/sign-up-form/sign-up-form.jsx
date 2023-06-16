@@ -4,7 +4,7 @@ import FormInput from "../form-input/form-input";
 import Button from "../button/button";
 import "./sign-up-form.scss"
 
-const SignUpForm = ({ onSignInHandler }) => {
+const SignUpForm = () => {
   const defaultFormFields = {
     displayName: "",
     email: "",
@@ -33,7 +33,6 @@ const SignUpForm = ({ onSignInHandler }) => {
       if (!await checkUserExists(user)) {
         await createUserDocumentFromAuth(user, { displayName });
       }
-      onSignInHandler(user)
     } catch(e) {
       if (e.code === "auth/email-already-in-use") {
         alert("An account already exists with this email.")

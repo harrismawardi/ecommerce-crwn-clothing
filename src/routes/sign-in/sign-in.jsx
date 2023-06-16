@@ -8,20 +8,16 @@ import './sign-in.scss'
 const SignIn = () => {
 
   const navigate = useNavigate();
-  const { setCurrentUser, currentUser } = useContext(UserContext)
+  const { currentUser } = useContext(UserContext);
 
   useEffect(() => {
     if (currentUser) { navigate("/") }
   }, [currentUser]);
 
-  const handleSignIn = (user) => {
-    setCurrentUser(user)
-  }
-
   return (
     <div className="authentication-container">
-      <SignInForm onSignInHandler={handleSignIn}/>
-      <SignUpForm onSignInHandler={handleSignIn} />
+      <SignInForm />
+      <SignUpForm />
     </div>
   );
 }

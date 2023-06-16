@@ -4,7 +4,7 @@ import FormInput from "../form-input/form-input";
 import Button from "../button/button";
 import './sign-in-form.scss'
 
-const SignInForm = ({ onSignInHandler }) => {
+const SignInForm = () => {
 
   const defaultFormFields = {
     email: "",
@@ -17,8 +17,7 @@ const SignInForm = ({ onSignInHandler }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const { user } = await signInAuthUserWithEmailAndPassword(email, password)
-      onSignInHandler(user)
+      await signInAuthUserWithEmailAndPassword(email, password)
     } catch(e) {
       switch (e.code) {
         case "auth/wrong-password":
@@ -40,11 +39,7 @@ const SignInForm = ({ onSignInHandler }) => {
 
   const signInWithGoogle = async () => {
     try {
-      const { user } = await signInWithGooglePopup();
-      if (!await checkUserExists(user)) {
-        await createUserDocumentFromAuth(user);
-      }
-      onSignInHandler(user)
+      await signInWithGooglePopup();
     } catch(e) {
       console.error('Error in google sign-in', e)
     }
@@ -58,7 +53,7 @@ const SignInForm = ({ onSignInHandler }) => {
         <FormInput label="Email" name="email" type="email" required={true} onChange={handleChange} value={email} />
         <FormInput label="Password" name="password" type="password" required={true} onChange={handleChange} value={password} />
         <div className="buttons-container">
-          <Button buttonType="inverted" type="submit">Sign In</Button>
+          <Button type="submit">Sign In</Button>
           <Button buttonType="google" type="button" onClick={signInWithGoogle}>Google Sign In</Button>
         </div>
       </form>

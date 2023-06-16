@@ -5,13 +5,8 @@ import Navigation from './routes/navigation/navigation'
 import SignIn from "./routes/sign-in/sign-in";
 import {Routes, Route } from 'react-router-dom';
 import SignOut from "./routes/sign-out/sign-out";
-import {useState} from "react";
 
 function App() {
-
-  // todo call method to check is alreadyAuthenticated
-
-  const [signedIn, setSignedIn] = useState(false)
 
   return (
     <Routes>

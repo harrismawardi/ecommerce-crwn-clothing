@@ -6,26 +6,22 @@ import { UserContext } from "../../contexts/user.context";
 const SignOut = () => {
 
   const navigate = useNavigate();
-  const { currentUser, setCurrentUser } = useContext(UserContext)
+  const { currentUser } = useContext(UserContext);
 
   useEffect(() => {
-    if (!currentUser) {
-      navigate("/sign-in")
-    }
+    if (!currentUser) { navigate("/sign-in") }
   }, [currentUser]);
 
   const handleSignOut = async () => {
     try {
       await logUserOut();
-      setCurrentUser(null);
       navigate("/");
     } catch(e) {
       console.error("Issue in logging user out.")
     }
-
   }
 
-  return <button onClick={handleSignOut}>Sign Out</button>
+  return <button onClick={handleSignOut}>Sign Out</button>;
 }
 
 export default SignOut;
