@@ -7,7 +7,6 @@ import {Routes, Route } from 'react-router-dom';
 import SignOut from "./routes/sign-out/sign-out";
 
 function App() {
-
   return (
     <Routes>
       <Route path='/' element={<Navigation/>}>
@@ -17,7 +16,7 @@ function App() {
         <Route path='sign-out' element={<SignOut />} />
       </Route>
     </Routes>
-);
+  );
 }
 
 export default App;
